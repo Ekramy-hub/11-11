@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حكايتنا ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --pink: #ff91a8;
+  --light: #ffd3dc;
+  --wine: #35151d;
+  --gold: #ffe0ad;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: radial-gradient(ellipse at top, #572a35, #260d14 75%);
+  color: white;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(120deg, #ffffff08, transparent, #ff91a808);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  color: #ffb6c4;
+  opacity: .35;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(700deg);
+  }
+}
+
+section {
+  position: relative;
+  z-index: 1;
+  width: min(92%, 760px);
+  margin: 35px auto;
+  padding: 28px 20px;
+  border: 1px solid #ffffff25;
+  border-radius: 30px;
+  background: linear-gradient(145deg,#ffffff18,#ffffff08);
+  box-shadow: 0 15px 40px #0003;
+  backdrop-filter: blur(15px);
+}
+
+h2 {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.gold { color: var(--gold); }
+.pink { color: var(--pink); }
+
+.subtitle {
+  text-align: center;
+  color: #e8cbd0;
+  margin-bottom: 25px;
+}
+
+/* الغلاف والظرف */
+
+#cover {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 25px;
+}
+
+.envelope {
+  width: min(80vw, 450px);
+  height: 240px;
+  position: relative;
+  margin-bottom: 35px;
+  cursor: pointer;
+  perspective: 900px;
+}
+
+.envelope-body {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 190px;
+  background: #e77e96;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px #0005;
+}
+
+.envelope-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(35deg,#a94c62 50%,transparent 50%);
+}
+
+.envelope-body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg,transparent 50%,#ffb0bf 50%);
+}
+
+.letter {
+  position: absolute;
+  width: 88%;
+  height: 170px;
+  left: 6%;
+  bottom: 85px;
+  background: white;
+  color: #874252;
+  border-radius: 22px 22px 5px 5px;
+  padding: 35px 10px;
+  transition: transform 1s;
+  z-index: 2;
+}
+
+.letter h3 { font-size: 23px; }
+.letter p { margin-top: 8px; font-size: 14px; }
+
+.flap {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background: #ffb1c0;
+  clip-path: polygon(0 0,100% 0,50% 100%);
+  transform-origin: top;
+  transition: transform .8s;
+  z-index: 3;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  transform: translateY(-90px);
+}
+
+.main-title {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 900;
+  color: #ffe0e7;
+  margin: 20px 0;
+}
+
+.open-btn {
+  background: #ffffff12;
+  color: white;
+  border: 1px solid #ffffff55;
+  padding: 14px 30px;
+  border-radius: 40px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 15px;
+  transition: .3s;
+}
+
+.open-btn:hover {
+  background: var(--pink);
+  transform: scale(1.05);
+}
+
+.hint {
+  margin-top: 25px;
+  color: #e7c3cb;
+  font-size: 15px;
+}
+
+/* العداد */
+
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+}
+
+.counter-box {
+  background: #ffffff12;
+  border: 1px solid #ffffff17;
+  border-radius: 24px;
+  padding: 22px 5px;
+  text-align: center;
+}
+
+.counter-box strong {
+  display: block;
+  font-size: 32px;
+  color: white;
+  font-weight: 900;
+}
+
+.counter-box span {
+  color: #e9cdd2;
+  font-size: 13px;
+}
+
+/* الموسيقى */
+
+.music-card {
+  margin-top: 28px;
+  padding: 20px;
+  background: #ffffff17;
+  border-radius: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-info h3 { font-size: 18px; }
+.music-info p { font-size: 13px; color: #e4c2ca; }
+
+.play-btn {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--pink);
+  color: white;
+  font-size: 23px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff91a888;
+}
+
+/* الوعود */
+
+.promise-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+}
+
+.promise {
+  background: #ffffff12;
+  border: 1px solid #ffffff20;
+  border-radius: 25px;
+  padding: 25px 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.promise .emoji {
+  display: block;
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+/* الرسائل */
+
+.message-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+}
+
+.message {
+  min-height: 150px;
+  border-radius: 25px;
+  background: #ffffff10;
+  border: 1px solid #ffffff20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.message:hover {
+  background: #ff91a822;
+  transform: translateY(-5px);
+}
+
+.message span {
+  font-size: 38px;
+  color: var(--gold);
+}
+
+/* الصور */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 15px;
+}
+
+.photo-card {
+  overflow: hidden;
+  background: #ffffff10;
+  border: 1px solid #ffffff25;
+  border-radius: 25px;
+  padding: 8px;
+  text-align: center;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
+
+.photo-card p {
+  padding: 12px 3px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* الرسالة الأخيرة */
+
+.final-letter {
+  min-height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.big-heart {
+  font-size: 65px;
+  color: var(--pink);
+  animation: heartbeat 1.4s infinite;
+}
+
+@keyframes heartbeat {
+  50% { transform: scale(1.2); }
+}
+
+.final-letter p {
+  line-height: 2.3;
+  color: #f3dfe3;
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+.final-letter h2 {
+  margin: 15px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 35px;
+  color: #d5abb5;
+  position: relative;
+  z-index: 1;
+}
+
+/* النوافذ المنبثقة */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #15070bdc;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.show { display: flex; }
+
+.modal-content {
+  width: min(100%,420px);
+  padding: 35px 25px;
+  text-align: center;
+  background: #512833;
+  border: 1px solid #ffffff30;
+  border-radius: 28px;
+  animation: appear .4s;
+}
+
+@keyframes appear {
+  from { transform: scale(.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content p {
+  line-height: 2;
+  margin: 20px 0;
+}
+
+.close {
+  background: var(--pink);
+  border: none;
+  padding: 10px 25px;
+  color: white;
+  border-radius: 30px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#story { display: none; }
+
+@media(max-width:480px) {
+  section { padding: 22px 14px; }
+  .counter-box strong { font-size: 25px; }
+  .promise { padding: 18px 5px; font-size: 12px; }
+  .photo-card img { height: 145px; }
+  .message { min-height: 120px; }
+  .message span { font-size: 30px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<!-- الغلاف -->
+
+<div id="cover">
+
+  <div class="envelope" id="envelope">
+    <div class="letter">
+      <h3>أنا & ملاك ❤️</h3>
+      <p>OUR ETERNAL LOVE STORY</p>
+    </div>
+    <div class="envelope-body"></div>
+    <div class="flap"></div>
+  </div>
+
+  <h1 class="main-title">أنا & ملاك</h1>
+
+  <button class="open-btn" onclick="openStory()">
+    💌 افتحي الجواب
+  </button>
+
+  <p class="hint">اضغطي على الظرف عشان تفتحي الحكاية</p>
+</div>
+
+<!-- محتوى الموقع -->
+
+<main id="story">
+
+  <!-- الحكاية والعداد -->
+
+  <section>
+
+    <h2>حكايتنا ❤️</h2>
+
+    <p class="subtitle">كل لحظة معاكي هي عمر جديد</p>
+
+    <h4 class="gold" style="text-align:center;margin-bottom:20px">
+      منذ أن بدأت القصة
+    </h4>
+
+    <div class="counter-grid">
+
+      <div class="counter-box">
+        <strong id="years">0</strong>
+        <span>سنة</span>
+      </div>
+
+      <div class="counter-box">
+        <strong id="months">0</strong>
+        <span>شهر</span>
+      </div>
+
+      <div class="counter-box">
+        <strong id="days">0</strong>
+        <span>يوم</span>
+      </div>
+
+      <div class="counter-box">
+        <strong id="hours">0</strong>
+        <span>ساعة</span>
+      </div>
+
+      <div class="counter-box">
+        <strong id="minutes">0</strong>
+        <span>دقيقة</span>
+      </div>
+
+      <div class="counter-box">
+        <strong id="seconds">0</strong>
+        <span>ثانية</span>
+      </div>
+
+    </div>
+
+    <!-- الموسيقى -->
+
+    <div class="music-card">
+
+      <div class="music-info">
+        <h3>♫ موسيقى الذكريات</h3>
+        <p id="songName">الأغنية اللي بتوصفنا 🎵</p>
+      </div>
+
+      <button class="play-btn" onclick="toggleMusic()" id="playBtn">
+        ▶
+      </button>
+
+    </div>
+
+    <audio id="music" loop>
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+  </section>
+
+  <!-- الوعود -->
+
+  <section>
+
+    <h2 class="gold">وعود من القلب</h2>
+
+    <div class="promise-grid">
+
+      <div class="promise">
+        <span class="emoji">🤝</span>
+        هفضل سندك في كل وقت
+      </div>
+
+      <div class="promise">
+        <span class="emoji">🛡️</span>
+        هحافظ على ثقتك وضحكتك
+      </div>
+
+      <div class="promise">
+        <span class="emoji">∞</span>
+        حبنا ملوش نهاية
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- رسائل صغيرة -->
+
+  <section>
+
+    <h2 class="gold">رسائل صغيرة</h2>
+
+    <div class="message-grid">
+
+      <div class="message" onclick="showMessage(0)">
+        <span>👑</span>
+        <p>رسالة ليكي</p>
+      </div>
+
+      <div class="message" onclick="showMessage(1)">
+        <span>⭐</span>
+        <p>حاجة مميزة</p>
+      </div>
+
+      <div class="message" onclick="showMessage(2)">
+        <span>💌</span>
+        <p>افتحي قلبي</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- الصور -->
+
+  <section>
+
+    <h2 class="gold">صور من الحكاية 📸</h2>
+
+    <p class="subtitle">
+      كل صورة هنا جزء صغير من حكايتنا
+    </p>
+
+    <div class="photo-grid">
+
+      <div class="photo-card">
+        <img src="images/photo1.jpg" alt="ذكرياتنا">
+        <p>أحلى صدفة في عمري ❤️</p>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/photo2.jpg" alt="ذكرياتنا">
+        <p>ضحكتك هي جمالي ✨</p>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/photo3.jpg" alt="ذكرياتنا">
+        <p>أحلى وقت معاكي 🌙</p>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/photo4.jpg" alt="ذكرياتنا">
+        <p>عالمي الخاص بيكي 💗</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- الرسالة الأخيرة -->
+
+  <section class="final-letter">
+
+    <div class="big-heart">♥</div>
+
+    <h2>ملاكي قلبي.. ❤️</h2>
+
+    <p>
+      حبيبتي، عايز أقولك إن كل كلمة كتبتها هنا
+      وكل صورة حطيتها هي جزء صغير من اللي حاسه بيكي.
+
+      وجودك في حياتي حاجة جميلة ومميزة،
+      وضحكتك من الحاجات اللي بتخلّي يومي أحلى.
+
+      عايزنا نفضل دايماً فاكرين كل لحظة حلوة
+      وكل ذكرى جمعتنا، ونفضل نبني ذكريات أجمل.
+
+      إنتي ليكي مكانة خاصة عندي،
+      وأتمنى أشوفك دايماً مبسوطة.
+    </p>
+
+    <h2 class="pink">بحبك يا حبيبتي.. للأبد ❤️</h2>
+
+    <button class="open-btn" onclick="showMessage(3)">
+      💌 افتحي آخر مفاجأة
+    </button>
+
+  </section>
+
+  <footer>
+    صُنع بكل الحب ❤️
+    <br>
+    أنا & ملاك
+  </footer>
+
+</main>
+
+<!-- نافذة الرسائل -->
+
+<div class="modal" id="modal" onclick="closeModal(event)">
+
+  <div class="modal-content">
+
+    <h2 class="pink" id="modalTitle">رسالة ليكي ❤️</h2>
+
+    <p id="modalText"></p>
+
+    <button class="close" onclick="hideModal()">
+      قفل ❤️
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+
+// =================================
+// 1- تاريخ بداية الحكاية
+// غير التاريخ بالتاريخ الحقيقي
+// =================================
+
+const startDate = new Date("2023-01-01T00:00:00");
+
+function updateCounter() {
+
+  const now = new Date();
+
+  let total = Math.max(0, now - startDate);
+
+  let seconds = Math.floor(total / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+  let days = Math.floor(hours / 24);
+
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+
+  if (now.getDate() < startDate.getDate()) months--;
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  const lastAnniversary = new Date(
+    startDate.getFullYear() + years,
+    startDate.getMonth(),
+    startDate.getDate(),
+    startDate.getHours(),
+    startDate.getMinutes(),
+    startDate.getSeconds()
+  );
+
+  const lastMonth = new Date(
+    lastAnniversary.getFullYear(),
+    lastAnniversary.getMonth() + months,
+    lastAnniversary.getDate(),
+    lastAnniversary.getHours(),
+    lastAnniversary.getMinutes(),
+    lastAnniversary.getSeconds()
+  );
+
+  const remaining = Math.max(0, now - lastMonth);
+
+  document.getElementById("years").textContent = years;
+  document.getElementById("months").textContent = months;
+  document.getElementById("days").textContent =
+    Math.floor(remaining / 86400000);
+
+  document.getElementById("hours").textContent =
+    Math.floor(remaining / 3600000) % 24;
+
+  document.getElementById("minutes").textContent =
+    Math.floor(remaining / 60000) % 60;
+
+  document.getElementById("seconds").textContent =
+    Math.floor(remaining / 1000) % 60;
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
+
+// =================================
+// 2- فتح الظرف
+// =================================
+
+function openStory() {
+
+  document.getElementById("envelope")
+    .classList.add("open");
+
+  setTimeout(() => {
+
+    document.getElementById("cover").style.display = "none";
+
+    document.getElementById("story").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+  }, 900);
+}
+
+// =================================
+// 3- الموسيقى
+// =================================
+
+const music = document.getElementById("music");
+const playBtn = document.getElementById("playBtn");
+
+async function toggleMusic() {
+
+  if (music.paused) {
+
+    try {
+      await music.play();
+      playBtn.textContent = "Ⅱ";
+    } catch (error) {
+      alert("تأكد إن ملف music.mp3 موجود في فولدر الموقع");
+    }
+
+  } else {
+
+    music.pause();
+    playBtn.textContent = "▶";
+
+  }
+}
+
+music.addEventListener("ended", () => {
+  playBtn.textContent = "▶";
+});
+
+// =================================
+// 4- الرسائل
+// =================================
+
+const messages = [
+
+  {
+    title: "إنتي أميرتي 👑",
+    text: "وجودك في حياتي من أجمل الحاجات اللي حصلتلي، وإنتي تستاهلي كل حاجة حلوة."
+  },
+
+  {
+    title: "إنتي مميزة ⭐",
+    text: "في حاجات كتير ممكن تتنسي، لكن اللحظات الحلوة اللي بنعيشها سوا هتفضل ليها مكانة خاصة."
+  },
+
+  {
+    title: "من قلبي ليكي 💌",
+    text: "مهما كتبت مش هعرف أوصف قد إيه وجودك بيفرق معايا، ربنا يديم بينا كل حاجة حلوة."
+  },
+
+  {
+    title: "مفاجأة أخيرة ❤️",
+    text: "لو وصلتي لحد هنا، فعايزك تعرفي إن الموقع كله اتعمل عشان أقولك إنك شخص غالي ومميز عندي جداً. بحبك يا ملاك ❤️"
+  }
+
+];
+
+function showMessage(index) {
+
+  document.getElementById("modalTitle").textContent =
+    messages[index].title;
+
+  document.getElementById("modalText").textContent =
+    messages[index].text;
+
+  document.getElementById("modal").classList.add("show");
+
+}
+
+function hideModal() {
+  document.getElementById("modal").classList.remove("show");
+}
+
+function closeModal(event) {
+  if (event.target.id === "modal") hideModal();
+}
+
+// =================================
+// 5- قلوب وبتلات متحركة
+// =================================
+
+const petals = document.getElementById("petals");
+
+const symbols = ["♥", "♡", "✿", "❤"];
+
+function createPetal() {
+
+  const petal = document.createElement("div");
+
+  petal.className = "petal";
+
+  petal.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  petal.style.left = Math.random() * 100 + "%";
+
+  petal.style.fontSize =
+    (12 + Math.random() * 18) + "px";
+
+  petal.style.animationDuration =
+    (7 + Math.random() * 10) + "s";
+
+  petals.appendChild(petal);
+
+  setTimeout(() => petal.remove(), 18000);
+}
+
+setInterval(createPetal, 450);
+
+</script>
+
+</body>
+</html>
